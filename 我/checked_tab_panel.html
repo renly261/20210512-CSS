@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            list-style: none;
+            box-sizing: border-box;
+            transition: 0.5s;
+        }
+
+        .panel-group {
+            width: 800px;
+        }
+
+        .tab-group label {
+            display: inline-block;
+            padding: 10px 30px;
+            border: 1px solid #ccc;
+            background-color: #ccc;
+        }
+
+        .content-group {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        /* 使用 radio 的唯一性 + 同層全體選擇器切換 */
+        /* .radio1 被 checked 時同一層的 .content-group 的子層除了 .content1 的全部隱藏 */
+        #radio1:checked~.content-group :not(.content1) {
+            display: none;
+        }
+
+        #radio2:checked~.content-group :not(.content2) {
+            display: none;
+        }
+
+        #radio3:checked~.content-group :not(.content3) {
+            display: none;
+        }
+
+        #radio4:checked~.content-group :not(.content4) {
+            display: none;
+        }
+
+        #radio5:checked~.content-group :not(.content5) {
+            display: none;
+        }
+
+        .panel-controler {
+            opacity: 0;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="panel-group ">
+        <!-- radio id 要與底下 label 對應 -->
+        <input type="radio" name="panel" id="radio1" class="panel-controler" checked>
+        <input type="radio" name="panel" id="radio2" class="panel-controler">
+        <input type="radio" name="panel" id="radio3" class="panel-controler">
+        <input type="radio" name="panel" id="radio4" class="panel-controler">
+        <input type="radio" name="panel" id="radio5" class="panel-controler">
+
+        <div class="tab-group">
+            <label for="radio1">tab1</label>
+            <label for="radio2">tab2</label>
+            <label for="radio3">tab3</label>
+            <label for="radio4">tab4</label>
+            <label for="radio5">tab5</label>
+        </div>
+
+        <div class="content-group">
+            <div class="content1">
+                生物重視哈哈尋求是個意義引用在於獎勵情況體力意思保健，有關。
+            </div>
+            <div class="content2">
+                就不城市通訊害怕大哥責任編輯充分請點擊難得，著名咖啡它們本。
+            </div>
+            <div class="content3">
+                影音主任年齡難以都會正式，美國明白接口世界盃現代提出，唯一。
+            </div>
+            <div class="content4">
+                部分圖象專區幫我，不僅大人商務有些緊張夢幻，你在特性傳統房。
+            </div>
+            <div class="content5">
+                圖文於是至今答應為了老闆緊緊股份補充基本崇拜學會一口氣介紹。 </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

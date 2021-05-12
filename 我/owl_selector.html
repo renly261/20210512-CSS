@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            width: 300px;
+            padding: 1rem;
+            background: #eee;
+            border: 1px solid #333;
+        }
+
+        .link {
+            display: block;
+            padding: 0.5rem;
+            text-decoration: none;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* .sidebar .link+.link {
+            margin-top: 1rem;
+        } */
+        /* 貓頭鷹選擇器 如果一個區塊有其他元素在 想統一樣式可以用 */
+        /* 前面最好給一個範圍 否則會除了整個網頁的第一個不選其他都選 */
+        /* sidebar 的子層第一個不選 其他都要 */
+        .sidebar *+* {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <aside> 側邊 可以想成有意思的 div 標籤 -->
+    <aside class="sidebar">
+        <a href="#" class="link">美女革命有限責任公。</a>
+        <a href="#" class="link">美女革命有限責任公。</a>
+        <a href="#" class="link">美女革命有限責任公。</a>
+        <p>請勾選我...</p>
+        <input type="checkbox" name="" id="">click me!
+    </aside>
+</body>
+
+</html>

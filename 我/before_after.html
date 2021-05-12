@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: white;
+            background: #000;
+            margin: 2rem 0 0 0;
+            padding: 1rem;
+        }
+
+        hr {
+            margin: 2% 0;
+        }
+
+        .container {
+            width: 75%;
+            margin: 1% auto;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            color: white;
+            background: #333;
+            margin: 20px auto;
+
+            /* .box::before ::after 的父元素要給定位點 */
+            position: relative;
+        }
+
+        /* 要用 ::before ::after content 一定要有 content=''
+        預設是 inline 要 display: block 才能做樣式*/
+        /* 跟 .box 同層級 */
+        .box::before {
+            content: '';
+            width: 50px;
+            height: 50px;
+            background: red;
+            /* position: absolute fixed float會讓元素變區塊 
+            display:block 就可以不用寫 */
+
+            position: absolute;
+            left: -100px;
+            top: 0;
+        }
+
+        .box::after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            background: red;
+            /* position: absolute fixed float會讓元素變區塊 
+            display: block 就可以不用寫 */
+
+            position: absolute;
+            right: -100px;
+            top: 0;
+        }
+
+        .col {
+            width: 45%;
+            margin: 2.5%;
+            float: left;
+        }
+
+        .col img {
+            width: 100%;
+        }
+
+        .bg-color {
+            background: #ffa;
+        }
+
+        /* 用偽元素 clear: both 清除浮動*/
+        .clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /* 當作背景容器使用 */
+        .bg {
+            color: white;
+            height: 300px;
+            background: rgba(150, 0, 100, 0.2);
+            position: relative;
+        }
+
+        .bg::before {
+            content: '';
+            position: absolute;
+            /* width: 100%;
+            height: 100%; */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("https://picsum.photos/1920/1080/?random=1") no-repeat center/cover;
+            z-index: -1
+        }
+
+        /* 後面會蓋前面 ::after 會蓋掉 ::before */
+        .bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1
+        }
+
+        /* 摸到主體，讓分身做情 */
+        .box1 {
+            width: 150px;
+            height: 150px;
+            background: url("https://picsum.photos/150/150/?random=1") no-repeat center/cover;
+            margin: auto;
+            transition: 0.5s;
+
+            position: relative;
+        }
+
+        .box1::before {
+            content: '';
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            top: 0;
+            left: -110%;
+            background: url("https://picsum.photos/150/150/?random=2") no-repeat center/cover;
+            transition: 0.5s;
+        }
+
+        .box1::after {
+            content: '';
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            top: 0;
+            right: -110%;
+            background: url("https://picsum.photos/150/150/?random=3") no-repeat center/cover;
+            transition: 0.5s;
+        }
+
+        /* 摸到主體，如果 ::before ::after 是屬於這個主體的 不需要空格 */
+        /* hover ::before 中間沒有空格 */
+        .box1:hover::before {
+            left: 110%;
+        }
+
+        .box1:hover::after {
+            right: 110%;
+        }
+
+        .box2 {
+            width: 400px;
+            height: 150px;
+            margin: auto;
+            border: 5px solid #aaa;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .box2::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-left: 30px solid #aaa;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>偽元素 ::before ::after</h1>
+        <div class="box">
+            <div class="content">Lorem</div>
+        </div>
+        <div class="container">
+            <h1>啟動條件與功能特性</h1>
+            <ul style="font-size:24px;">
+                <li>1.要有 content='' 才有作用，content 可以放內容也可以空著</li>
+                <li>2.建立時為 inline 要做樣式 display:block</li>
+                <li>3.結構上 ::before 會在內容區域前方 ::after 會在內容區域後方</li>
+                <li>4.偽元素後面不能再建立偽元素 ::before::before 是不行的</li>
+                <li>5.無法使用在 input img iframe，這種叫置換元素(replaced element)</li>
+                <li>6.通常會搭配定位使用，所以要注意父元素有沒有設定定位點(relative absolute fixed)</li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="container">
+            <h1>1.可以清除浮動</h1>
+        </div>
+        <!-- overflow:auto 也可以清除浮動 -->
+        <div class="container bg-color clearfix" style="overflow:auto">
+            <div class="col">
+                <img src="https://picsum.photos/600/400/?random=1">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta voluptatum tenetur quas
+                    consequuntur, obcaecati totam quis. Facilis officia possimus laborum iure? Ullam fugiat error
+                    veritatis nemo sint ipsa impedit vitae?</p>
+            </div>
+            <div class="col">
+                <img src="https://picsum.photos/600/400/?random=2">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta voluptatum tenetur quas
+                    consequuntur, obcaecati totam quis. Facilis officia possimus laborum iure? Ullam fugiat error
+                    veritatis nemo sint ipsa impedit vitae?</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="container">
+            <h1>2.當作背景容器使用</h1>
+            <div class="bg">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente ratione libero laborum adipisci
+                architecto perferendis assumenda eveniet, omnis nobis non amet quaerat dolorum ab iure necessitatibus
+                et, quae dignissimos suscipit.
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="container">
+            <h1>3.摸到主體，讓分身做事情</h1>
+        </div>
+        <div class="container">
+            <div class="box1">
+                <div class="inside"></div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="container">
+            <h1>4.對話框</h1>
+        </div>
+        <div class="container">
+            <div class="box2"></div>
+        </div>
+    </div>
+</body>
+
+</html>
